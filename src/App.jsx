@@ -27,6 +27,10 @@ function App() {
     axios.post('http://localhost:3000/users/', user).then(fetchUsers)
     console.log(usersList)
   }
+  const removeUser = id => {
+    console.log(id)
+    axios.delete(`http://localhost:3000/users/${id}`).then(fetchUsers)
+  }
   useEffect(fetchUsers, [])
 
   return (
@@ -35,9 +39,17 @@ function App() {
         <ul className='my-2 border text-slate-200'>
           {usersList.map(elem => {
             return (
-              <li key={elem.id} className='columns-3 px-2 py-1'>
+              <li key={elem.id} className='columns-4 px-2 py-1'>
                 <div className='text-black'> {elem.name}</div>
                 <div className='text-black'>{elem.author}</div>
+                <div className='text-red-600'>
+                  <button
+                    className='px-2 hover:bg-slate-200'
+                    onClick={() => removeUser(elem.id)}
+                  >
+                    <i className='fa-solid fa-trash-can'></i>
+                  </button>
+                </div>
                 <div className='text-black'>{elem.role}</div>
               </li>
             )
