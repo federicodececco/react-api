@@ -52,7 +52,13 @@ function App() {
       <div className='mx-auto my-4 w-md'>
         <ul className='my-2 border text-slate-200'>
           {usersList.map(elem => {
-            return <UserRow key={elem.id} user={elem}></UserRow>
+            return (
+              <UserRow
+                key={elem.id}
+                user={elem}
+                remove={() => removeUser(elem.id)}
+              ></UserRow>
+            )
           })}
         </ul>
 
