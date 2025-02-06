@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import UserRow from './components/UserRow'
 
 function App() {
   const [user, setUser] = useState({
@@ -7,17 +8,20 @@ function App() {
     id: '',
     author: '',
     content: '',
-    role: '',
+    role: 'FrontEnd',
+    visible: true,
   })
   const [usersList, setUserList] = useState([''])
   function fetchUsers() {
     axios.get('http://localhost:3000/users/').then(res => setUserList(res.data))
+    console.log(user)
   }
 
   const handleFormField = (fieldName, value) => {
     setUser(currentUser => {
       return { ...currentUser, [fieldName]: value }
     })
+    console.log(user)
   }
   const handleSubmit = e => {
     e.preventDefault()
@@ -26,6 +30,16 @@ function App() {
 
     axios.post('http://localhost:3000/users/', user).then(fetchUsers)
     console.log(usersList)
+    setUser(currentUser => {
+      return {
+        name: '',
+        id: '',
+        author: '',
+        content: '',
+        role: 'FrontEnd',
+        visible: 'true',
+      }
+    })
   }
   const removeUser = id => {
     console.log(id)
@@ -38,21 +52,7 @@ function App() {
       <div className='mx-auto my-4 w-md'>
         <ul className='my-2 border text-slate-200'>
           {usersList.map(elem => {
-            return (
-              <li key={elem.id} className='columns-4 px-2 py-1'>
-                <div className='text-black'> {elem.name}</div>
-                <div className='text-black'>{elem.author}</div>
-                <div className='text-red-600'>
-                  <button
-                    className='px-2 hover:bg-slate-200'
-                    onClick={() => removeUser(elem.id)}
-                  >
-                    <i className='fa-solid fa-trash-can'></i>
-                  </button>
-                </div>
-                <div className='text-black'>{elem.role}</div>
-              </li>
-            )
+            return <UserRow key={elem.id} user={elem}></UserRow>
           })}
         </ul>
 
@@ -84,7 +84,14 @@ function App() {
               handleFormField('content', event.target.value)
             }}
           />
-
+          <input
+            name='visible'
+            type='checkbox'
+            checked={user.visible}
+            onChange={event => {
+              handleFormField('visible', event.target.checked)
+            }}
+          />
           <select
             name='role'
             onChange={event => {

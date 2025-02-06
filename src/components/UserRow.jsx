@@ -1,0 +1,20 @@
+export default function UserRow({ user }) {
+  console.log(user)
+  if (user.visible === true) {
+    return (
+      <li className='columns-4 px-2 py-1'>
+        <div className='text-black'> {user.name}</div>
+        <div className='text-black'>{user.author}</div>
+        <div className='text-red-600'>
+          <button
+            className='px-2 hover:bg-slate-200'
+            onClick={() => removeUser(user.id)}
+          >
+            <i className='fa-solid fa-trash-can'></i>
+          </button>
+        </div>
+        <div className='text-black'>{user.role}</div>
+      </li>
+    )
+  } else return
+}
