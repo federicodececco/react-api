@@ -1,7 +1,7 @@
-export default function Form({ user, formField }) {
+export default function Form({ user, formField, formSubmit }) {
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formSubmit}>
         <input
           className='my-4 border px-1 text-emerald-800'
           name='name'
