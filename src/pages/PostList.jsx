@@ -2,7 +2,7 @@ import { useState, useEffect, useTransition } from 'react'
 
 import axios from 'axios'
 import UserRow from '../components/UserRow'
-import NavBar from '../components/NavBar'
+import Form from '../components/Form'
 export default function PostList() {
   const startState = {
     name: '',
@@ -77,7 +77,6 @@ export default function PostList() {
   useEffect(fetchUsers, [])
   return (
     <>
-      <NavBar></NavBar>
       <div className='mx-auto my-4 w-md'>
         <ul className='my-2 border text-slate-200'>
           {usersList.map(elem => {
@@ -91,7 +90,7 @@ export default function PostList() {
             )
           })}
         </ul>
-
+        {/* <Form user={user} formField={() => handleFormField}></Form> */}
         <form onSubmit={handleSubmit}>
           <input
             className='my-4 border px-1 text-emerald-800'

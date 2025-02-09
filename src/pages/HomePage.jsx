@@ -5,7 +5,7 @@ export default function HomePage() {
 
   return (
     <>
-      <NavBar></NavBar>
+      <h1>ciao</h1>
     </>
   )
 }
