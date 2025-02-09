@@ -1,11 +1,14 @@
-import NavBar from '../components/NavBar'
-
+import Header from './Header'
+import HomeMain from '../components/HomeMain'
 export default function HomePage() {
   //devo cambaire il fetch, dato che non carico davvero i dati sul server
 
   return (
     <>
-      <h1>ciao</h1>
+      <div className='mx-auto max-w-3xl'>
+        <Header></Header>
+        <HomeMain></HomeMain>
+      </div>
     </>
   )
 }

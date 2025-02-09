@@ -6,7 +6,9 @@ export default function DefaultLayout() {
       <div className='bg-blue-600 text-white'>
         <NavBar></NavBar>
       </div>
-      <Outlet></Outlet>
+      <div className='bg-gray-100'>
+        <Outlet></Outlet>
+      </div>
     </>
   )
 }
