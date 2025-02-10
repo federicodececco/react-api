@@ -5,7 +5,6 @@ export default function TeamMembersGrid({ remove, modify, usersList }) {
       {usersList.map((elem, index) => {
         return (
           <UserRow
-            className='animate-slide-in'
             index={index}
             key={elem.id}
             user={elem}
