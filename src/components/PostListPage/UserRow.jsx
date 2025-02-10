@@ -4,11 +4,7 @@ export default function UserRow({ user, remove, modify, index }) {
     return (
       <div className='overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg'>
         <Link to={`/post-list/${user.id}`}>
-          <img
-            src={user.img}
-            alt='Sarah Johnson'
-            className='h-64 w-full object-cover'
-          />
+          <img src={user.img} className='h-64 w-full object-cover' />
           <div className='p-6'>
             <h3 className='mb-2 inline text-xl font-bold text-gray-800'>
               {user.author}
