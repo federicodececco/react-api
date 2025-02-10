@@ -4,6 +4,6 @@ const links = [
     content: 'Homepage',
   },
   { link: '/about-us', content: 'About us' },
-  { link: '/post-list', content: 'people' },
+  { link: '/post-list', content: 'Our Team' },
 ]
 export default links

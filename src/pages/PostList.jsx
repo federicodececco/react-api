@@ -1,7 +1,8 @@
 import { useState, useEffect, useTransition } from 'react'
-
+import TeamMembersGrid from '../components/PostListPage/TeamMembersGrid'
+import HeaderPost from '../components/PostListPage/HeaderPost'
 import axios from 'axios'
-import UserRow from '../components/UserRow'
+
 import Form from '../components/Form'
 export default function PostList() {
   const startState = {
@@ -11,13 +12,16 @@ export default function PostList() {
     content: '',
     role: 'FrontEnd',
     visible: true,
+    img: '',
   }
 
   const [user, setUser] = useState(startState)
   const [usersList, setUserList] = useState([])
 
   function fetchUsers() {
-    axios.get('http://localhost:3000/users/').then(res => setUserList(res.data))
+    axios
+      .get('http://localhost:3000/users/')
+      .then(res => setUserList(JSON.parse(JSON.stringify(res.data))))
     console.log('fetch')
   }
 
@@ -38,15 +42,15 @@ export default function PostList() {
 
   const removeUser = id => {
     console.log(id)
-    axios.delete(`http://localhost:3000/users/${id}`).then(() => fetchUsers)
+    axios.delete(`http://localhost:3000/users/${id}`).then(() => fetchUsers())
   }
 
   const modifyUser = id => {
     let patchUser = {}
     axios
       .get(`http://localhost:3000/users/${id}`)
-      .then(response => {
-        const currentUser = response.data
+      .then(res => {
+        const currentUser = res.data
         patchUser = {
           name: user.name !== startState.name ? user.name : currentUser.name,
           author:
@@ -77,19 +81,14 @@ export default function PostList() {
   useEffect(fetchUsers, [])
   return (
     <>
-      <div className='mx-auto my-4 w-md'>
-        <ul className='my-2 border text-slate-200'>
-          {usersList.map(elem => {
-            return (
-              <UserRow
-                key={elem.id}
-                user={elem}
-                remove={() => removeUser(elem.id)}
-                modify={() => modifyUser(elem.id)}
-              ></UserRow>
-            )
-          })}
-        </ul>
+      <div className='container mx-auto max-w-6xl px-4 py-12'>
+        <HeaderPost></HeaderPost>
+        <TeamMembersGrid
+          usersList={usersList}
+          remove={removeUser}
+          modify={modifyUser}
+        ></TeamMembersGrid>
+
         <Form
           user={user}
           formField={handleFormField}

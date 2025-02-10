@@ -5,7 +5,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div className='mx-auto max-w-3xl'>
+      <div className='mx-auto max-w-6xl'>
         <Header></Header>
         <HomeMain></HomeMain>
       </div>
